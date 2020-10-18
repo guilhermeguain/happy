@@ -12,3 +12,9 @@ body {
 body, input, button, textarea {
   font: 600 18px Nunito, sans-serif;
 }
+
+.page-title,
+.text-color {
+  color: #4D6F80;
+}
+

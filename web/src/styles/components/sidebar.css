@@ -1,4 +1,4 @@
-aside.app-sidebar {
+.app-sidebar {
   position: fixed;
   height: 100%;
   padding: 32px 24px;
@@ -10,12 +10,47 @@ aside.app-sidebar {
   align-items: center;
 }
 
-aside.app-sidebar img {
+.app-sidebar img {
   width: 48px;
 }
 
-aside.app-sidebar footer a,
-aside.app-sidebar footer button {
+.app-sidebar .sidebar-nav-icons {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-sidebar .sidebar-nav-icons a {
+  position: relative;
+}
+
+.app-sidebar .sidebar-nav-icons a:not(:last-of-type) {
+  margin-bottom: 16px;
+}
+
+.app-sidebar .sidebar-nav-icons a.notification:before {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  content: '';
+  background: #FFD666;
+
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  border: 2px solid #12AFCB;
+}
+
+.app-sidebar .sidebar-nav-icons a.active {
+  background: #FFD666;
+}
+
+.app-sidebar .sidebar-nav-icons a.active svg {
+  stroke: #0089A5;
+}
+
+.app-sidebar a,
+.app-sidebar button {
   width: 48px;
   height: 48px;
 
@@ -33,7 +68,7 @@ aside.app-sidebar footer button {
   align-items: center;
 }
 
-aside.app-sidebar footer a:hover,
-aside.app-sidebar footer button:hover {
+.app-sidebar a:hover,
+.app-sidebar button:hover {
   background: #17D6EB;
 }
