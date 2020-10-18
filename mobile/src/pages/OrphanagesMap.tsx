@@ -5,6 +5,8 @@ import { Feather } from '@expo/vector-icons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 
+import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
+
 import mapMarker from '../images/map-marker.png';
 
 import api from '../services/api';
@@ -17,13 +19,32 @@ interface Orphanage {
 }
 
 export default function OrphanagesMap() {
+  const [location, setLocation] = useState<[number, number]>([0, 0]);
+  const [errorMsg, setErrorMsg] = useState('');
+
   const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
   const navigation = useNavigation();
 
   useFocusEffect(() => {
     api.get('orphanages').then(response => {
       setOrphanages(response.data);
-    })
+    });
+
+    async function loadInitialPosition() {
+      const { granted } = await requestPermissionsAsync();
+      
+      if (granted) {
+        const { coords } = await getCurrentPositionAsync({});
+        
+        const { latitude, longitude } = coords;
+
+        setLocation([latitude, longitude]);
+      } else {
+        setErrorMsg('Permission to access location was denied');
+      }
+    }
+
+    loadInitialPosition();
   });
 
   function handleNavigateToOrphanageDetails(id: number) {
@@ -36,12 +57,17 @@ export default function OrphanagesMap() {
 
   return (
     <View style={styles.container}>
+      { errorMsg !== '' && (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{errorMsg}</Text>
+        </View>
+      ) }
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         initialRegion={{
-          latitude: -23.5611372,
-          longitude: -46.6995142,
+          latitude: location[0],
+          longitude: location[1],
           latitudeDelta: 0.008,
           longitudeDelta: 0.008,
         }}
@@ -84,6 +110,24 @@ export default function OrphanagesMap() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+
+  errorContainer: {
+    position: 'absolute',
+    top: 50,
+    left: 24,
+    right: 24,
+    zIndex: 1,
+    backgroundColor: '#FFF',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+  },
+
+  errorText: {
+    color: 'red',
+    fontSize: 14,
+    fontFamily: 'Nunito_700Bold',
   },
 
   map: {
