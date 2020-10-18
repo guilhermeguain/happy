@@ -28,6 +28,38 @@ export default {
     return response.json(orphanageView.render(orphanage));
   },
 
+  async update(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const {
+      name,
+      latitude,
+      longitude,
+      about,
+      instructions,
+      opening_hours,
+      open_on_weekends,
+    } = request.body;
+
+    const orphanagesRepository = getRepository(Orphanage);
+
+    const orphanage = await orphanagesRepository.findOneOrFail(id, {
+      relations: ['images']
+    });
+
+    orphanage.name = name;
+    orphanage.latitude = latitude;
+    orphanage.longitude = longitude;
+    orphanage.about = about;
+    orphanage.instructions = instructions;
+    orphanage.opening_hours = opening_hours;
+    orphanage.open_on_weekends = open_on_weekends;
+
+    await orphanagesRepository.save(orphanage);
+
+    return response.status(200).json({orphanage});
+  },
+
   async create(request: Request, response: Response) {
     const {
       name,
