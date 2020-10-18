@@ -25,6 +25,15 @@
   background: url('../../images/landing.svg') no-repeat 80% center;
 }
 
+#page-landing .header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#page-landing .header img {
+  margin-right: 80px;
+}
+
 #page-landing .content-wrapper main {
   max-width: 350px;
 }
@@ -42,21 +51,44 @@
 }
 
 .content-wrapper .location {
-  position: absolute;
-  top: 0;
-  right: 0;
-
   font-size: 24px;
   line-height: 34px;
 
   display: flex;
   flex-direction: column;
-
-  text-align: right;
 }
 
 .content-wrapper .location strong {
   font-weight: 800;
+}
+
+.content-wrapper .enter-dashboard {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background-color: #12D4E0;
+  min-height: 56px;
+  padding: 12px 42px;
+  border-radius: 20px;
+
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: background-color 0.2s;
+  transition: color 0.2s;
+}
+
+.content-wrapper .enter-dashboard:hover {
+  background: #96FEFF;
+  color: #15C3D6;
 }
 
 .content-wrapper .enter-app {
@@ -77,5 +109,5 @@
 }
 
 .content-wrapper .enter-app:hover {
-  background: #96FEFF;
+  background: #96FEFF; 
 }
