@@ -32,11 +32,12 @@ interface OrphanageParams {
 export default function EditOrphanage() {
   const history = useHistory();
   const params = useParams<OrphanageParams>();
-  const [orphanage, setOrphanage] = useState<Orphanage>();
+  // const [orphanage, setOrphanage] = useState<Orphanage>();
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const { latitude, longitude } = position;
   
+  const [orphanageId, setOrphanageId] = useState('');
   const [name, setName] = useState('');
   const [about, setAbout] = useState('');
   const [instructions, setInstructions] = useState('');
@@ -47,6 +48,7 @@ export default function EditOrphanage() {
 
   useEffect(() => {
     api.get(`orphanages/${params.id}`).then(response => {
+      setOrphanageId(params.id);
       setPosition({
         latitude: response.data.latitude,
         longitude: response.data.longitude
@@ -103,6 +105,7 @@ export default function EditOrphanage() {
 
     const data = new FormData();
 
+    data.append('id', orphanageId);
     data.append('name', name);
     data.append('about', about);
     data.append('latitude', String(latitude));
@@ -115,7 +118,7 @@ export default function EditOrphanage() {
       data.append('images', image);
     });
 
-    await api.post('orphanages', data);
+    await api.post(`orphanages/${orphanageId}`, data);
 
     alert('Cadastro realizado com sucesso!');
 
