@@ -120,9 +120,9 @@ export default function EditOrphanage() {
 
     await api.post(`orphanages/${orphanageId}`, data);
 
-    alert('Cadastro realizado com sucesso!');
+    alert('Orfanato atualizado com sucesso!');
 
-    history.push('/app');
+    history.push('/dashboard');
   }
 
   return (

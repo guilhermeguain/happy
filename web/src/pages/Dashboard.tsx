@@ -4,6 +4,7 @@ import { FiMapPin, FiAlertCircle, FiPower, FiEdit3, FiTrash } from 'react-icons/
 import { Map, TileLayer, Marker } from 'react-leaflet';
 
 import mapMarkerImg from '../images/map-marker.svg';
+import mapIcon from '../utils/mapIcon';
 import api from '../services/api';
 
 import '../styles/pages/dashboard.css';
@@ -48,7 +49,7 @@ function Dashboard() {
       <main>
         <div className="page-header">
           <h1 className="page-title">Orfanatos Cadastrados</h1>
-          <p className="qtd-items text-color">2 orfanatos</p>
+          <p className="qtd-items text-color">{orphanages.length} orfanatos</p>
         </div>
         <div className="page-content">
           <div className="orphanages-list">
@@ -61,6 +62,14 @@ function Dashboard() {
                     className="orphanage-map"
                   >
                     <TileLayer url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} />
+                    <Marker
+                      interactive={false}
+                      icon={mapIcon}
+                      position={[
+                        orphanage.latitude,
+                        orphanage.longitude
+                      ]} 
+                    />
                   </Map>
                   <div className="orphanage-content">
                     <h2 className="text-color">{orphanage.name}</h2>

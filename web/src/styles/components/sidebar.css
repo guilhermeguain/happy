@@ -39,6 +39,12 @@
   height: 8px;
   border-radius: 8px;
   border: 2px solid #12AFCB;
+
+  transition: border 0.2s;
+}
+
+.app-sidebar .sidebar-nav-icons a.notification:hover:before {
+  border: 2px solid #17D6EB;
 }
 
 .app-sidebar .sidebar-nav-icons a.active {
