@@ -1,0 +1,63 @@
+#page-delete-orphanage {
+  width: 100vw;
+  height: 100vh;
+  background: #FF669D;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#page-delete-orphanage .content-wrapper {
+  position: relative;
+
+  width: 100%;
+  max-width: 1100px;
+
+  height: 100%;
+  max-height: 680px;
+
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+
+  background: url('../../images/delete.svg') no-repeat 80% center;
+}
+
+#page-delete-orphanage main {
+  max-width: 350px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#page-delete-orphanage .title-delete {
+  font-size: 80px;
+  line-height: 80px;
+  margin-bottom: 20px;
+}
+
+#page-delete-orphanage .text-delete {
+  font-size: 24px;
+  line-height: 34px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#page-delete-orphanage .button-delete {
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+#page-delete-orphanage .button-delete,
+#page-delete-orphanage .button-return {
+  border: none;
+  border-radius: 20px;
+  background-color: #D6487B;
+  color: white;
+  padding: 12px 24px;
+  text-decoration: none;
+}
