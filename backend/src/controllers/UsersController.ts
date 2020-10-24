@@ -1,24 +1,33 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import userView from '../views/users_view';
-
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+import authConfig from '../config/auth.json'; 
 
 import User from '../models/User';
+import userView from '../views/users_view';
+
+function generateToken(params = {}) {
+  return jwt.sign(
+    params,
+    authConfig.secret,
+    { expiresIn: 86400 }
+  );
+}
 
 export default {
-
   async create(request: Request, response: Response) {
     const {
       name,
       email,
       password,
     } = request.body;
-
+    
     try {
       const usersRepository = getRepository(User);
       
-      if(await usersRepository.findOneOrFail({email})) {
+      if(await usersRepository.findOne({email})) {
         return response.status(409).json({
           error: 'User already exists'
         });
@@ -37,7 +46,7 @@ export default {
         usersRepository.save(user);
     
         return response.status(201).json(
-          userView.render(user)
+          userView.render(user, generateToken({ id: user.id }))
         );
       })
       .catch(err => {
@@ -47,7 +56,7 @@ export default {
       });
     } catch(err) {
       return response.status(400).json({
-        error: "User registration failed"
+        error: err.message
       });
     }
   },
@@ -73,7 +82,7 @@ export default {
       .then(result => {
         return result ? (
           response.status(201).json(
-            userView.render(user)
+            userView.render(user, generateToken({ id: user.id }))
           )
         ) : (
           response.status(400).json({
