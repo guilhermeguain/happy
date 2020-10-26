@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { FiMapPin, FiAlertCircle, FiPower, FiEdit3, FiTrash } from 'react-icons/fi';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 
+import { useAuth } from '../contexts/auth';
+
 import mapMarkerImg from '../images/map-marker.svg';
 import mapIcon from '../utils/mapIcon';
 import api from '../services/api';
@@ -18,12 +20,17 @@ interface Orphanage {
 
 function Dashboard() {
   const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
+  const { signOut } = useAuth();
 
   useEffect(() => {
     api.get('orphanages').then(response => {
       setOrphanages(response.data);
     });
   });
+
+  function handleSignOut() {
+    signOut();
+  }
 
   return (
     <div id="page-dashboard">
@@ -40,9 +47,9 @@ function Dashboard() {
         </div>
 
         <footer>
-          <Link to={'/'}>
+          <button onClick={handleSignOut}>
             <FiPower size={24} color="#FFF" />
-          </Link>
+          </button>
         </footer>
       </aside>
 
@@ -55,7 +62,7 @@ function Dashboard() {
           <div className="orphanages-list">
             {orphanages.map(orphanage => {
               return(
-                <div className="orphanage">
+                <div key={orphanage.id} className="orphanage">
                   <Map
                     center={[ orphanage.latitude, orphanage.longitude ]}
                     zoom={15}

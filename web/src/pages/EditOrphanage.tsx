@@ -61,8 +61,8 @@ export default function EditOrphanage() {
 
       const savedImages = response.data.images;
 
-      savedImages.map((image: { url: string; }) => {
-        setPreviewImages(previewImages => [...previewImages, image.url]);
+      savedImages.map((image: { url: string }) => {
+        return setPreviewImages(previewImages => [...previewImages, image.url]);
       });
     });
   }, [params.id]);

@@ -1,0 +1,198 @@
+#page-login {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(329.54deg, #29B6D1 0%, #00C7C7 100%);
+
+  display: flex;
+  align-items: center;
+}
+
+#page-login .content-wrapper {
+  position: relative;
+
+  width: 100%;
+  max-width: calc(100% - 520px);
+
+  height: 100%;
+  max-height: 680px;
+
+  display: flex;
+  justify-content: center;
+}
+
+#page-login .content-wrapper .location {
+  margin-top: 100px;
+  align-items: center;
+}
+
+#page-login main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+}
+
+#page-login aside {
+  position: fixed;
+  right: 0;
+
+  width: 100%;
+  max-width: 520px;
+
+  height: 100%;
+
+  padding: 80px;
+  background: #FFF;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#page-login aside .button-return {
+  position: absolute;
+  top: 80px;
+  right: 80px;
+
+  width: 48px;
+  height: 48px;
+
+  background: #EBF2F5;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#page-login aside .title-login {
+  color: #5C8599;
+  margin-bottom: 40px;
+}
+
+#page-login aside form label {
+  display: block;
+  color: #8FA7B2;
+}
+
+#page-login aside form .error {
+  padding-top: 5px;
+  display: block;
+  color: red;
+}
+
+#page-login aside form .input-block {
+  margin-bottom: 20px;
+}
+
+#page-login aside form .input-block input {
+  width: 100%;
+  background-color: #F5F8FA;
+  border: 1px solid #D3E2E5;
+  border-radius: 20px;
+  padding: 19px;
+  color: #5C8599;
+}
+
+#page-login aside form .remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+#page-login aside form .remember-forgot a {
+  color: #8FA7B2;
+  text-decoration: none;
+}
+
+#page-login aside form .remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+#page-login aside form .checkbox-group {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+#page-login aside form .checkbox-group input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+#page-login aside form .checkbox-group label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  z-index: 1;
+  line-height: 25px;
+}
+
+/* Create a custom checkbox */
+#page-login aside form .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background: #F5F8FA;
+  border: 1px solid #D3E2E5;
+  border-radius: 8px;
+}
+
+/* On mouse-over, add a grey background color */
+#page-login aside form .checkbox-group:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a colored background */
+#page-login aside form .checkbox-group input:checked ~ .checkmark {
+  background-color: #37C77F;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+#page-login aside form .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+#page-login aside form .checkbox-group input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+#page-login aside form .checkbox-group .checkmark:after {
+  left: 8px;
+  top: 6px;
+  width: 4px;
+  height: 6px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#page-login aside form button {
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  padding: 20px;
+  background: #37C77F;
+  color: white;
+}
+
+#page-login aside form button:disabled {
+  opacity: 0.5;
+}
